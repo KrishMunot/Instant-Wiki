@@ -1,1 +1,1 @@
-# Instant-Wikihjiiiiii
+Instant Wiki

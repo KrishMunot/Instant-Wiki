@@ -24,7 +24,7 @@ a {
 <script>
     $('#searchterm').keyup(function(e){
         var q = $('#searchterm').val();
-        $.getJSON("http://en.wikipedia.org/w/api.php?callback=?",
+        $.getJSON("http://en.wikipedia.org/w/api.php?callback="+"?",
         {
             srsearch:q,
             srwhat:"text",

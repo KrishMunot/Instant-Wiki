@@ -21,5 +21,16 @@ a {
     <input id="searchterm" type = "text" /> 
     <button id = "search" > Search </button>
     <div id = "results"></div>
+<script>
+    $('#searchterm').keyup(function(e){
+        var q = $('#searchterm').val();
+        $.getJSON("http://en.wikipedia.org/w/api.php?callback=?",
+        {
+            srsearch:q,
+            srwhat:"text",
+            action:"query",
+            list:"search",
+            format:"json"
+        }    
 </body>
 </html>

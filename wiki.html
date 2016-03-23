@@ -36,6 +36,8 @@ a {
             $('#results').empty();
              $('#results').append("<p>Results for <b>" + q + "</b></p>" );
              $.each(data.query.search,function(i,value)
+             {
+             $('#results').append('http://en.wikipedia.org/wiki/" + encodeURIComponent(value.title) )
         };
 </body>
 </html>

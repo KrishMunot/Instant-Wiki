@@ -1,7 +1,6 @@
 <html>
 <head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"> 
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/fonts/fonts-min.css">
 </script>
 
 <style type="text/css">
@@ -11,9 +10,8 @@ a {
 }
 
 </style>
-</head>
-</script>
-<title> Live Wikipedia </title>
+
+<title> Live Wiki </title>
 </head>
 
 <body>
@@ -21,24 +19,27 @@ a {
     <input id="searchterm" type = "text" /> 
     <button id = "search" > Search </button>
     <div id = "results"></div>
-<script>
+
+    <script>
+
     $('#searchterm').keyup(function(e){
         var q = $('#searchterm').val();
-        $.getJSON("http://en.wikipedia.org/w/api.php?callback="+"?",
+        $.getJSON("http://en.wikipedia.org/w/api.php?callback=?",
         {
             srsearch:q,
             srwhat:"text",
             action:"query",
             list:"search",
             format:"json"
-        }    
+        }, 
         function(data){
             $('#results').empty();
-             $('#results').append("<p>Results for <b>" + q + "</b></p>" );
-             $.each(data.query.search,function(i,value)
-             {
-             $('#results').append('http://en.wikipedia.org/wiki/" + encodeURIComponent(value.title) )
-                });
+            $('#results').append("<p>Results for <b>" + q + "</b></p>" );
+            $.each(data.query.search,function(i,value){
+                $('#results').append("<div><a href='http://en.wikipedia.org/wiki/" + encodeURIComponent(value.title) + "'>" + "<b>" + value.title + "</b>"  + "</a><br />" + value.snippet + "<br /><br /></div>");
+            });
+        });
+    });
 </script>
 </body>
 </html>

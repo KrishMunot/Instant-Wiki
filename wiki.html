@@ -14,14 +14,33 @@ a {
 <title> Live Wikipedia </title>
 </head>
 
-<body>
-    <h2> Search Wikipedia </h2>
+<body onload="setInterval(change_color,1000);">
+    <h2 id="h2" style="color:black;"> Search Wikipedia </h2>
     <input id="searchterm" type = "text" /> 
     <button id = "search" > Search </button>
     <div id = "results"></div>
 
     <script>
-
+	function change_color()
+	{
+		if(document.getElementById("h2").style.color == "black")
+		{
+		    document.getElementById("results").style.color = "red"
+			document.getElementById("h2").style.color = "blue";
+		}else if(document.getElementById("h2").style.color == "blue")
+		{
+			document.getElementById("results").style.color = "lime"
+			document.getElementById("h2").style.color = "red";
+		}else if(document.getElementById("h2").style.color == "red")
+		{
+		   document.getElementById("results").style.color = "black";
+			document.getElementById("h2").style.color = "lime";
+		}else if(document.getElementById("h2").style.color == "lime")
+		{
+		    document.getElementById("results").style.color = "blue";
+			document.getElementById("h2").style.color = "black";
+		}
+	}
     $('#searchterm').keyup(function(e){
         var q = $('#searchterm').val();
         $.getJSON("http://en.wikipedia.org/w/api.php?callback=?",
@@ -36,7 +55,7 @@ a {
             $('#results').empty();
             $('#results').append("<p>Results for <b>" + q + "</b></p>" );
             $.each(data.query.search,function(i,value){
-                $('#results').append("<div><a href='http://en.wikipedia.org/wiki/" + encodeURIComponent(value.title) + "'>" + "<b>" + value.title + "</b>"  + "</a><br />" + value.snippet + "<br /><br /></div>");
+                $('#results').append("<div style='border:solid;border-color:blue;'><a href='http://en.wikipedia.org/wiki/" + encodeURIComponent(value.title) + "'>" + "<b>" + value.title + "</b>"  + "</a><br /><hr>" + value.snippet + "<br /><br /></div>");
             });
         });
     });

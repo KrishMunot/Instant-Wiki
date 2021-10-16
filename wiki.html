@@ -1,6 +1,8 @@
 <html>
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"> 
+
 </script>
 
 <style type="text/css">
@@ -9,9 +11,13 @@ a {
     text-decoration: none;
 }
 
+.animate__animated.animate__fadeIn {
+  --animate-duration: 0.6s;
+}
+
 </style>
 
-<title> Live Wikipedia </title>
+<title>Live Wikipedia</title>
 </head>
 
 <body>
@@ -21,7 +27,6 @@ a {
     <div id = "results"></div>
 
     <script>
-
     $('#searchterm').keyup(function(e){
         var q = $('#searchterm').val();
         $.getJSON("http://en.wikipedia.org/w/api.php?callback=?",
@@ -36,7 +41,7 @@ a {
             $('#results').empty();
             $('#results').append("<p>Results for <b>" + q + "</b></p>" );
             $.each(data.query.search,function(i,value){
-                $('#results').append("<div><a href='http://en.wikipedia.org/wiki/" + encodeURIComponent(value.title) + "'>" + "<b>" + value.title + "</b>"  + "</a><br />" + value.snippet + "<br /><br /></div>");
+                $('#results').append("<div class='animate__animated animate__fadeIn'><a href='http://en.wikipedia.org/wiki/" + encodeURIComponent(value.title) + "'>" + "<b>" + value.title + "</b>"  + "</a><br />" + value.snippet + "<br /><br /></div>");
             });
         });
     });
